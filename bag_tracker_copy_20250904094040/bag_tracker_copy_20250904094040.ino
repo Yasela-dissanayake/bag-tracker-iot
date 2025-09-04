@@ -1,18 +1,17 @@
-// 02_serial_json_sanity.ino
+// 03_button_event.ino
+const int BTN = 18;
+
 void setup() {
   Serial.begin(115200);
-  delay(200);
-  Serial.println("{\"event\":\"boot\",\"msg\":\"esp32 up\"}");
+  pinMode(BTN, INPUT_PULLUP); // pressed = LOW
 }
 
 void loop() {
-  static unsigned long last = 0;
-  unsigned long now = millis();
-  if (now - last >= 1000) {
-    last = now;
-    // fake “heartbeat” you’ll keep for future tests
-    Serial.print("{\"ts\":");
-    Serial.print((unsigned long)(millis()));
-    Serial.println(",\"event\":\"heartbeat\"}");
+  static int last = HIGH;
+  int v = digitalRead(BTN);
+  if (v != last) {
+    last = v;
+    if (v == LOW) Serial.println("{\"event\":\"button\",\"state\":\"pressed\"}");
+    else          Serial.println("{\"event\":\"button\",\"state\":\"released\"}");
   }
 }
