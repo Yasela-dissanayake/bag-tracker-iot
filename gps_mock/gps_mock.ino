@@ -8,7 +8,7 @@
 
 // ===== Pins =====
 const int BUZ_PIN = 25;   // Buzzer +
-const int LED_PIN = 13;    // LED (through 220Ω to GND)
+const int LED_PIN = 5;    // LED (through 220Ω to GND)
 const int SDA_PIN = 21;   // I2C SDA (MPU)
 const int SCL_PIN = 22;   // I2C SCL (MPU)
 const int GPS_RX2 = 16;   // ESP32 RX2  <- GPS TX
